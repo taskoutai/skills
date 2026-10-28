@@ -195,8 +195,8 @@ Tell the user, briefly:
   behind each rule; the export does not include it.
 - If the team uses taskout (optional): upload `playbook.json` in the task's **Playbook** tab,
   **Import playbook**. Every rule arrives as a proposal to approve (**Approve all**), then **Publish**.
-  If the rules are published unchanged, the test counts for that version. If anyone edits a rule in
-  taskout, that version needs its own test (below) before taskout generates synthetic data from it.
+  If the rules are published unchanged, the test counts for that version; if anyone edits a rule in
+  taskout, test that version (below).
 
 More on what stays local and why: [references/data-handling.md](references/data-handling.md).
 
