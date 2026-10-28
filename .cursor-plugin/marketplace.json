@@ -1,0 +1,13 @@
+{
+  "name": "taskout",
+  "owner": {
+    "name": "taskout"
+  },
+  "plugins": [
+    {
+      "name": "taskout",
+      "source": "./",
+      "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill."
+    }
+  ]
+}

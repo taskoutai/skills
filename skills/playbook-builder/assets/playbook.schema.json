@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "taskout playbook file",
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "taskout.playbook"
+    },
+    "format_version": {
+      "type": "string",
+      "const": "2"
+    },
+    "skill_version": {
+      "type": "string",
+      "pattern": "^[0-9A-Za-z.+-]{1,40}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 200
+    },
+    "general_guidance": {
+      "default": "",
+      "type": "string",
+      "maxLength": 4000
+    },
+    "precedent_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    },
+    "rules": {
+      "minItems": 1,
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200
+          },
+          "activity_type": {
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "^[a-z_]+\\.[a-z_.]+$"
+          },
+          "guidance": {
+            "default": "",
+            "type": "string",
+            "maxLength": 2000
+          },
+          "escalation": {
+            "default": "",
+            "type": "string",
+            "maxLength": 1000
+          },
+          "positions": {
+            "minItems": 1,
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tier": {
+                  "type": "string",
+                  "enum": [
+                    "preferred",
+                    "fallback",
+                    "unacceptable"
+                  ]
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 3000
+                },
+                "conditions": {
+                  "default": "",
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                "comment": {
+                  "default": "",
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                "support_matters": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 200
+                },
+                "citation_refs": {
+                  "default": [],
+                  "maxItems": 30,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_.-]{1,40}$"
+                  }
+                }
+              },
+              "required": [
+                "tier",
+                "text",
+                "support_matters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "topic",
+          "activity_type",
+          "positions"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "local_test": {
+      "type": "object",
+      "properties": {
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "held_out_matters": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "readings_confirmed": {
+          "type": "boolean",
+          "const": true
+        },
+        "results": {
+          "minItems": 1,
+          "maxItems": 3000,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rule": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 59
+              },
+              "matter": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 50
+              },
+              "predicted": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 5
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "actual": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 5
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "rule",
+              "matter",
+              "predicted",
+              "actual"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "content_sha256",
+        "held_out_matters",
+        "readings_confirmed",
+        "results"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "format",
+    "format_version",
+    "skill_version",
+    "title",
+    "precedent_count",
+    "rules"
+  ],
+  "additionalProperties": false
+}

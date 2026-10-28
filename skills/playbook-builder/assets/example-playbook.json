@@ -1,0 +1,91 @@
+{
+  "format": "taskout.playbook",
+  "format_version": "2",
+  "skill_version": "1.2.0",
+  "title": "Individual return preparation",
+  "general_guidance": "Written from the preparer's side. Derived from four past returns; the home office method and the documentation threshold varied with the client's records.",
+  "precedent_count": 4,
+  "rules": [
+    {
+      "topic": "Home office deduction method",
+      "activity_type": "deductions.home_office",
+      "guidance": "Check the client's records before choosing a method.",
+      "escalation": "Escalate to the reviewing partner when the office is also used for personal purposes.",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Use the simplified method at $5 per square foot, up to 300 square feet.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 3,
+          "citation_refs": [
+            "c3",
+            "c9",
+            "c14"
+          ]
+        },
+        {
+          "tier": "fallback",
+          "text": "Use the regular method with actual expenses allocated by floor area.",
+          "conditions": "The client has complete utility and rent records for the year.",
+          "comment": "",
+          "support_matters": 1,
+          "citation_refs": [
+            "c21"
+          ]
+        },
+        {
+          "tier": "unacceptable",
+          "text": "Claim a home office for a space that is also used for personal purposes.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 2,
+          "citation_refs": [
+            "c4",
+            "c15"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Charitable contribution substantiation",
+      "activity_type": "deductions.charitable",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Require a written acknowledgment for each single gift of $250 or more before deducting it.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 4,
+          "citation_refs": [
+            "c6",
+            "c11",
+            "c17",
+            "c23"
+          ]
+        }
+      ]
+    }
+  ],
+  "local_test": {
+    "content_sha256": "0c1b785f0305331849dc63ba6bfab907868ff646d1eff28a58753af8c870aceb",
+    "held_out_matters": 1,
+    "readings_confirmed": true,
+    "results": [
+      {
+        "rule": 0,
+        "matter": 1,
+        "predicted": 0,
+        "actual": 0
+      },
+      {
+        "rule": 1,
+        "matter": 1,
+        "predicted": 0,
+        "actual": 0
+      }
+    ]
+  }
+}

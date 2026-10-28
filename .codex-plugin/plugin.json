@@ -1,0 +1,33 @@
+{
+  "name": "taskout",
+  "version": "0.1.0",
+  "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill.",
+  "author": {
+    "name": "taskout"
+  },
+  "repository": "https://github.com/taskout/skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "playbook",
+    "team-conventions",
+    "rules",
+    "agent-skills",
+    "knowledge-work",
+    "local-first"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "taskout",
+    "shortDescription": "Team playbooks for your agents",
+    "longDescription": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill.",
+    "developerName": "taskout",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Build a playbook for how our team does this work from the past matters in this folder"
+    ]
+  }
+}

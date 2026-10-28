@@ -1,0 +1,16 @@
+{
+  "name": "taskout",
+  "version": "0.1.0",
+  "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill.",
+  "author": {
+    "name": "taskout"
+  },
+  "keywords": [
+    "playbook",
+    "team-conventions",
+    "rules",
+    "agent-skills",
+    "knowledge-work",
+    "local-first"
+  ]
+}

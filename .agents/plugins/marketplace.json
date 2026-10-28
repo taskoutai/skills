@@ -1,0 +1,20 @@
+{
+  "name": "taskout",
+  "interface": {
+    "displayName": "taskout"
+  },
+  "plugins": [
+    {
+      "name": "taskout",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/taskout/skills.git"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
