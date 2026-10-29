@@ -7,7 +7,7 @@
     "name": "taskout"
   },
   "repository": "https://github.com/taskout/skills",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": [
     "playbook",
     "team-conventions",

@@ -1,7 +1,7 @@
 ---
 name: playbook-builder
 description: Builds a team's playbook for one kind of work (rules with preferred, fallback and unacceptable positions, and when to escalate) from its own past work, on the team's machine, then exports it as an Agent Skill and a PLAYBOOK.md that the team's AI agents follow. Use when the user wants to capture how their team does a kind of work, derive working rules or positions from past matters or precedents, give their AI agent the team's conventions, or prepare a playbook file for taskout without uploading documents.
-license: Apache-2.0
+license: MIT
 compatibility: Needs read access to the matter folders and Python 3.9+ for scripts/check_playbook.py and scripts/export_playbook.py (standard library only, no network). Reading XLSX files may need openpyxl.
 metadata:
   publisher: "taskout"
