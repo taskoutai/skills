@@ -13,21 +13,21 @@
 ### Claude Code
 
 ```
-/plugin marketplace add taskout/skills
+/plugin marketplace add taskoutai/skills
 /plugin install taskout@taskout
 ```
 
 ### Codex
 
 ```sh
-codex plugin marketplace add taskout/skills
+codex plugin marketplace add taskoutai/skills
 codex plugin add taskout@taskout
 ```
 
 ### npx skills
 
 ```
-npx skills add https://github.com/taskout/skills
+npx skills add https://github.com/taskoutai/skills
 ```
 
 ### Clone / copy
