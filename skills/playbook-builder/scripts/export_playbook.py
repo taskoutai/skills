@@ -23,6 +23,13 @@ NAME = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 TIER_LABEL = {"preferred": "Preferred", "fallback": "Fallback", "unacceptable": "Never"}
 TIER_ORDER = {"preferred": 0, "fallback": 1, "unacceptable": 2}
 CODE = chr(96)
+CLIENT_NOTE = "Where a rule names a client, follow that client's position for that client's work instead of the preferred one. Red lines still apply."
+OUTCOME = {"approve": "approves", "reject": "rejects", "answer": "answers"}
+
+
+def client_note(ref):
+    return ("These rules are for client %s%s%s only. Where one says which of the team's rules it replaces, or has the same topic as one, "
+            "follow it for this client's work instead. Red lines from both still apply." % (CODE, one_line(ref), CODE))
 
 
 def slug(title):
@@ -50,7 +57,12 @@ def activities(rules):
 def description(f, groups):
     """The skill's description: what it is and when to use it, at most 1024 characters."""
     title = one_line(f["title"])
-    head = "The team's own rules for %s: preferred approaches, accepted fallbacks and when they apply, red lines and when to escalate. Use when doing, planning or reviewing %s work" % (title, title)
+    ref = one_line(f["client_ref"]) if "client_ref" in f else ""
+    if ref:
+        head = ("The team's own rules for client %s (%s): what to do for this client's work, from its own documents and past engagements, "
+                "red lines and when to escalate. Use when doing, planning or reviewing any work for client %s" % (ref, title, ref))
+    else:
+        head = "The team's own rules for %s: preferred approaches, accepted fallbacks and when they apply, red lines and when to escalate. Use when doing, planning or reviewing %s work" % (title, title)
     topics = [one_line(r["topic"]) for r in f["rules"]]
     out = head + "."
     for k in range(len(topics), 0, -1):
@@ -62,14 +74,29 @@ def description(f, groups):
     return out[:1024]
 
 
-def support(p, n):
+def support(p, n, client):
+    out = " (stated in the client's documents)" if p.get("doc_refs") else ""
     s = p.get("support_matters")
-    if not isinstance(s, int) or s <= 0:
+    if isinstance(s, int) and not isinstance(s, bool) and s > 0:
+        out += (" (seen in %d of the client's %d past engagements)" if client else " (seen in %d of %d past engagements)") % (s, n)
+    return out
+
+
+def years_text(v):
+    """'2025' -> '2025'; '2023-2025' -> '2023 to 2025'; '2026-' -> '2026 and later'; '-2024' -> '2024 and earlier'."""
+    t = re.sub(r"\s+", "", v or "").replace("\u2013", "-").replace("\u2014", "-")
+    m = re.fullmatch(r"([0-9]{4})?(-)?([0-9]{4})?", t)
+    if not t or not m or not (m.group(1) or m.group(3)):
         return ""
-    return " (seen in %d of %d past matters)" % (s, n)
+    lo, dash, hi = m.group(1), m.group(2), m.group(3)
+    if not dash:
+        return lo
+    if lo and hi:
+        return lo if lo == hi else "%s to %s" % (lo, hi)
+    return ("%s and later" % lo) if lo else ("%s and earlier" % hi)
 
 
-def rule_md(r, n, level="##"):
+def rule_md(r, n, level="##", client=False):
     lines = ["%s %s" % (level, one_line(r["topic"])), ""]
     if one_line(r.get("guidance")):
         lines += [sentence(r["guidance"]), ""]
@@ -77,13 +104,70 @@ def rule_md(r, n, level="##"):
         line = "- **%s:** %s" % (TIER_LABEL[p["tier"]], sentence(p["text"]))
         if one_line(p.get("conditions")):
             line += " **When:** %s" % sentence(p["conditions"])
-        line += support(p, n)
+        line += support(p, n, client)
         if one_line(p.get("comment")):
             line += " *Note: %s*" % sentence(p["comment"])
         lines.append(line)
+    for x in r.get("client_exceptions") or []:
+        line = "- **For client %s%s%s:** %s" % (CODE, one_line(x["client_ref"]), CODE, sentence(x["text"]))
+        if one_line(x.get("conditions")):
+            line += " **When:** %s" % sentence(x["conditions"])
+        s, m = x.get("support_matters"), x.get("client_matters")
+        if isinstance(s, int) and s > 0 and isinstance(m, int) and m > 0:
+            line += " (seen in %d of their %d past engagements)" % (s, m)
+        if one_line(x.get("comment")):
+            line += " *Note: %s*" % sentence(x["comment"])
+        lines.append(line)
+    if r.get("all_services") is True:
+        lines.append("- **For:** all of the client's work, not only this kind of work.")
+    if one_line(r.get("replaces")):
+        lines.append("- **Replaces the team's rule:** %s" % sentence(r["replaces"]))
+    if years_text(r.get("tax_years")):
+        lines.append("- **Tax years:** %s." % years_text(r["tax_years"]))
     if one_line(r.get("escalation")):
         lines.append("- **Escalate:** %s" % sentence(r["escalation"]))
     return lines + [""]
+
+
+def has_exceptions(rules):
+    return any(r.get("client_exceptions") for r in rules)
+
+
+def note_lines(f, rules):
+    """The note on client positions: a client file's own note, else the one for client exceptions when there are any."""
+    if "client_ref" in f:
+        return [client_note(f["client_ref"]), ""]
+    return [CLIENT_NOTE, ""] if has_exceptions(rules) else []
+
+
+def workflow_md(f, groups, linked):
+    """The steps of the work in order, each with its rules' activity, and the paths where the work branches."""
+    w = f.get("workflow")
+    if not w or not w.get("steps"):
+        return []
+    steps, edges = w["steps"], w.get("edges") or []
+    lead = "Do the work in this order, following the paths below where it branches." if edges else "Do the work in this order."
+    lines = ["## Workflow", "", lead, ""]
+    for i, st in enumerate(steps):
+        line = "%d. **%s**" % (i + 1, one_line(st["name"]))
+        line += ": " + sentence(st.get("description")) if one_line(st.get("description")) else "."
+        act = st["activity_type"]
+        if act in groups:
+            line += (" Rules: [%s%s%s](activities/%s.md)" % (CODE, act, CODE, act)) if linked else (" Rules: %s%s%s" % (CODE, act, CODE))
+        lines.append(line)
+    lines.append("")
+    if edges:
+        node = lambda v: "Start" if v == "start" else "End" if v == "end" else one_line(steps[v]["name"])
+        lines += ["Paths:", ""]
+        for e in edges:
+            line = "- %s -> %s" % (node(e["from"]), node(e["to"]))
+            if e.get("outcome") in OUTCOME:
+                line += ", after a person %s" % OUTCOME[e["outcome"]]
+            if one_line(e.get("label")):
+                line += ": " + sentence(e["label"])
+            lines.append(line)
+        lines.append("")
+    return lines
 
 
 def red_lines(f):
@@ -135,13 +219,18 @@ def skill_md(f, name, groups, fp):
     ]
     if one_line(f.get("general_guidance")):
         lines += [one_line(f["general_guidance"]), ""]
-    lines += ["These rules come from the team's past work and were reviewed by the team. " + HOW_TO_USE, ""]
+    if "client_ref" in f:
+        lines += ["These rules come from the client's own documents and the team's past work for it, and were reviewed by the team. " + HOW_TO_USE, ""]
+    else:
+        lines += ["These rules come from the team's past work and were reviewed by the team. " + HOW_TO_USE, ""]
+    lines += note_lines(f, f["rules"])
     rl = red_lines(f)
     if rl:
         lines += ["## Red lines (never)", ""] + rl + [""]
     esc = escalations(f)
     if esc:
         lines += ["## Escalate", ""] + esc + [""]
+    lines += workflow_md(f, groups, True)
     lines += [
         "## Activities",
         "",
@@ -159,8 +248,9 @@ def skill_md(f, name, groups, fp):
 
 def activity_md(f, act, rules, fp):
     lines = ["# %s%s%s" % (CODE, act, CODE), "", "Part of: %s. %s" % (one_line(f["title"]), HOW_TO_USE), ""]
+    lines += note_lines(f, [r for _, r in rules])
     for _, r in rules:
-        lines += rule_md(r, f["precedent_count"])
+        lines += rule_md(r, f["precedent_count"], "##", "client_ref" in f)
     return "\n".join(lines + footer(fp))
 
 
@@ -168,17 +258,22 @@ def playbook_md(f, groups, fp):
     lines = ["# %s" % one_line(f["title"]), ""]
     if one_line(f.get("general_guidance")):
         lines += [one_line(f["general_guidance"]), ""]
-    lines += ["These are the team's rules for this work, drafted from its past work and reviewed by the team. " + HOW_TO_USE, ""]
+    if "client_ref" in f:
+        lines += ["These are the team's rules for this client, drafted from the client's own documents and past work and reviewed by the team. " + HOW_TO_USE, ""]
+    else:
+        lines += ["These are the team's rules for this work, drafted from its past work and reviewed by the team. " + HOW_TO_USE, ""]
+    lines += note_lines(f, f["rules"])
     rl = red_lines(f)
     if rl:
         lines += ["## Red lines (never)", ""] + rl + [""]
     esc = escalations(f)
     if esc:
         lines += ["## Escalate", ""] + esc + [""]
+    lines += workflow_md(f, groups, False)
     for act, rules in groups.items():
         lines += ["## %s%s%s" % (CODE, act, CODE), ""]
         for _, r in rules:
-            lines += rule_md(r, f["precedent_count"], "###")
+            lines += rule_md(r, f["precedent_count"], "###", "client_ref" in f)
     return "\n".join(lines + footer(fp))
 
 

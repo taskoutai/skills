@@ -4,10 +4,13 @@ What goes where when you use this skill:
 
 | Stays on this machine | Leaves it only if the user shares it |
 |---|---|
-| The matters' documents and deliverables | `playbook.json`, and `playbook-export/` made from it |
+| The engagements' documents and deliverables | `playbook.json`, and `playbook-export/` made from it |
 | `.playbook-builder/report.md` (citations: files, pages, cells) | Opaque citation ids (`c12`), not what they point to (in `playbook.json` only) |
 | `.playbook-builder/redact.txt` (names, identifiers, amounts) | Support counts per position |
-| `.playbook-builder/notes.md` | The test: per rule and matter number, the predicted and the actual position (in `playbook.json` only) |
+| `.playbook-builder/notes.md` | The test: per rule and engagement number, the predicted and the actual position (in `playbook.json` only) |
+| Which engagement is which client's | Client exceptions: the firm's client reference (never a name) and that client's counts (in `playbook.json` only) |
+| The text of the team's own skills | Each skill's name and its `SKILL.md` hash, how each topic compares with them, and opaque `s` ids for the passages (in `playbook.json` only) |
+| A client's own documents (engagement letter, instructions, elections, agreements) | In a client file: its reference, the rules they state in the team's words with the client's standing parameters, the tax years, and opaque `d` ids for the passages |
 
 - The model this agent runs on reads the documents in this session. That is between the team and its
   model provider. If the work involves taxpayer data (IRC 7216) or other regulated data, the team

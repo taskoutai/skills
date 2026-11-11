@@ -1,0 +1,334 @@
+{
+  "format": "taskout.playbook",
+  "format_version": "2",
+  "skill_version": "1.5.0",
+  "title": "Revisión de contratos — proveedores",
+  "general_guidance": "  Two spaces and anext line\n\twithin the guidance  ",
+  "precedent_count": 5,
+  "rules": [
+    {
+      "topic": "Payment terms | net days",
+      "activity_type": "contract.payment_terms",
+      "guidance": "Is the term in days or months?",
+      "escalation": "Ask the deal lead when the vendor insists on prepayment!",
+      "positions": [
+        {
+          "tier": "unacceptable",
+          "text": "Agree to prepayment of the full fee",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 2,
+          "citation_refs": []
+        },
+        {
+          "tier": "fallback",
+          "text": "Accept net 45",
+          "conditions": "The vendor is a sole supplier",
+          "comment": "Seen once, in the 2023 renewal",
+          "support_matters": 1,
+          "citation_refs": []
+        },
+        {
+          "tier": "preferred",
+          "text": "Net 30 from invoice receipt.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 4,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": [
+        {
+          "client_ref": "V:204",
+          "text": "  Net 60 — agreed in the master agreement ",
+          "conditions": "Only under the 2024 master agreement",
+          "comment": "",
+          "support_matters": 2,
+          "client_matters": 3,
+          "citation_refs": []
+        },
+        {
+          "client_ref": "V-9",
+          "text": "Net 15!",
+          "conditions": "",
+          "comment": "Small vendor.",
+          "support_matters": 1,
+          "client_matters": 1,
+          "citation_refs": []
+        }
+      ]
+    },
+    {
+      "topic": "Clause 1: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.boilerplate",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 1",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 2: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.risk_allocation",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 2",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 3: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.boilerplate",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 3",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 4: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.risk_allocation",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 4",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 5: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.boilerplate",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 5",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 6: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.risk_allocation",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 6",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 7: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.boilerplate",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 7",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 8: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.risk_allocation",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 8",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 9: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.boilerplate",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 9",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 10: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.risk_allocation",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 10",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 11: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.boilerplate",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 11",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    },
+    {
+      "topic": "Clause 12: liability caps, indemnities, assignment and notice requirements across renewals and amendments",
+      "activity_type": "contract.risk_allocation",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Keep the firm's standard wording for clause 12",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": []
+        }
+      ],
+      "client_exceptions": []
+    }
+  ],
+  "workflow": {
+    "steps": [
+      {
+        "activity_type": "contract.intake",
+        "name": "Recepción del contrato",
+        "description": ""
+      },
+      {
+        "activity_type": "contract.payment_terms",
+        "name": "Payment terms",
+        "description": "Check the vendor's terms against ours"
+      },
+      {
+        "activity_type": "contract.risk_allocation",
+        "name": "Risk allocation",
+        "description": "Liability and indemnities."
+      },
+      {
+        "activity_type": "contract.boilerplate",
+        "name": "Boilerplate",
+        "description": ""
+      }
+    ],
+    "edges": [
+      {
+        "from": "start",
+        "to": 0,
+        "label": "",
+        "outcome": ""
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "label": "",
+        "outcome": ""
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "label": "  Vendor accepts net 30 ",
+        "outcome": ""
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "label": "",
+        "outcome": "approve"
+      },
+      {
+        "from": 1,
+        "to": "end",
+        "label": "Deal lead declines?",
+        "outcome": "reject"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "label": "",
+        "outcome": ""
+      },
+      {
+        "from": 3,
+        "to": "end",
+        "label": "",
+        "outcome": ""
+      }
+    ]
+  }
+}

@@ -25,10 +25,42 @@
       "type": "string",
       "maxLength": 4000
     },
+    "client_ref": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:-]{1,60}$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[0-9a-f]{32}$"
+    },
     "precedent_count": {
       "type": "integer",
-      "minimum": 1,
+      "minimum": 0,
       "maximum": 200
+    },
+    "firm_skills": {
+      "default": [],
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "name",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
     },
     "rules": {
       "minItems": 1,
@@ -100,12 +132,110 @@
                     "type": "string",
                     "pattern": "^[A-Za-z0-9_.-]{1,40}$"
                   }
+                },
+                "stated_refs": {
+                  "default": [],
+                  "maxItems": 30,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_.-]{1,40}$"
+                  }
+                },
+                "doc_refs": {
+                  "default": [],
+                  "maxItems": 30,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_.-]{1,40}$"
+                  }
                 }
               },
               "required": [
                 "tier",
                 "text",
                 "support_matters"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "stated_vs_practice": {
+            "default": "",
+            "type": "string",
+            "enum": [
+              "",
+              "agree",
+              "stated_only",
+              "practice_only",
+              "conflict"
+            ]
+          },
+          "tax_years": {
+            "default": "",
+            "type": "string",
+            "maxLength": 20
+          },
+          "replaces": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 200
+          },
+          "all_services": {
+            "default": false,
+            "type": "boolean"
+          },
+          "client_exceptions": {
+            "default": [],
+            "maxItems": 30,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "client_ref": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._:-]{1,60}$"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 3000
+                },
+                "conditions": {
+                  "default": "",
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                "comment": {
+                  "default": "",
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                "support_matters": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 200
+                },
+                "client_matters": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 200
+                },
+                "citation_refs": {
+                  "default": [],
+                  "maxItems": 30,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_.-]{1,40}$"
+                  }
+                }
+              },
+              "required": [
+                "client_ref",
+                "text",
+                "support_matters",
+                "client_matters"
               ],
               "additionalProperties": false
             }
@@ -118,6 +248,101 @@
         ],
         "additionalProperties": false
       }
+    },
+    "workflow": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "minItems": 1,
+          "maxItems": 40,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "activity_type": {
+                "type": "string",
+                "maxLength": 80,
+                "pattern": "^[a-z_]+\\.[a-z_.]+$"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 80
+              },
+              "description": {
+                "default": "",
+                "type": "string",
+                "maxLength": 600
+              }
+            },
+            "required": [
+              "activity_type",
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "edges": {
+          "default": [],
+          "maxItems": 200,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 39
+                  },
+                  {
+                    "type": "string",
+                    "const": "start"
+                  }
+                ]
+              },
+              "to": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 39
+                  },
+                  {
+                    "type": "string",
+                    "const": "end"
+                  }
+                ]
+              },
+              "label": {
+                "default": "",
+                "type": "string",
+                "maxLength": 120
+              },
+              "outcome": {
+                "default": "",
+                "type": "string",
+                "enum": [
+                  "",
+                  "approve",
+                  "reject",
+                  "answer"
+                ]
+              }
+            },
+            "required": [
+              "from",
+              "to"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "steps"
+      ],
+      "additionalProperties": false
     },
     "local_test": {
       "type": "object",

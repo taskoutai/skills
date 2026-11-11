@@ -1,0 +1,149 @@
+{
+  "format": "taskout.playbook",
+  "format_version": "2",
+  "skill_version": "1.5.0",
+  "title": "C-1042: individual return",
+  "general_guidance": "From the client's 2025 engagement letter, its written instructions and three past returns. The client keeps full home office records, so the team uses the regular method for it.",
+  "client_ref": "C:1042",
+  "task_id": "task_00000000000000000000000000001042",
+  "precedent_count": 3,
+  "rules": [
+    {
+      "topic": "State return scope",
+      "activity_type": "client.scope",
+      "guidance": "",
+      "escalation": "Ask the client's relationship partner before starting any state return.",
+      "all_services": true,
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Prepare the federal return only; the state return is a separate engagement.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": [],
+          "doc_refs": [
+            "d1"
+          ]
+        },
+        {
+          "tier": "unacceptable",
+          "text": "Start the state return without a signed engagement for it.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": [],
+          "doc_refs": [
+            "d1"
+          ]
+        }
+      ],
+      "tax_years": "2025"
+    },
+    {
+      "topic": "Draft review order",
+      "activity_type": "client.deadlines",
+      "guidance": "",
+      "escalation": "",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Send the draft to the client's controller by the 15th of the month before the due date, and to the partner for review only after the controller's comments.",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 2,
+          "citation_refs": [
+            "c4",
+            "c9"
+          ],
+          "doc_refs": [
+            "d3"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Home office deduction method",
+      "activity_type": "deductions.home_office",
+      "guidance": "",
+      "escalation": "",
+      "replaces": "Home office deduction method",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Use the regular method with actual expenses allocated by floor area.",
+          "conditions": "",
+          "comment": "The client keeps full utility and rent records every year.",
+          "support_matters": 3,
+          "citation_refs": [
+            "c2",
+            "c7",
+            "c11"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Section 754 election",
+      "activity_type": "client.elections",
+      "guidance": "",
+      "escalation": "",
+      "tax_years": "2023 -",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Apply the section 754 election in force to every transfer of an interest",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 2,
+          "citation_refs": [
+            "c5"
+          ],
+          "doc_refs": [
+            "d4"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Old fee cap",
+      "activity_type": "client.scope",
+      "guidance": "",
+      "escalation": "",
+      "tax_years": "-2024",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Stop and ask when time passes 40 hours",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 0,
+          "citation_refs": [],
+          "doc_refs": [
+            "d2"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Bank covenant statement",
+      "activity_type": "client.reporting",
+      "guidance": "",
+      "escalation": "",
+      "tax_years": "2024-2026",
+      "positions": [
+        {
+          "tier": "preferred",
+          "text": "Deliver a reviewed statement within 90 days of year end",
+          "conditions": "",
+          "comment": "",
+          "support_matters": 1,
+          "citation_refs": [
+            "c8"
+          ],
+          "doc_refs": []
+        }
+      ]
+    }
+  ]
+}

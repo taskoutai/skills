@@ -1,9 +1,9 @@
 {
   "$schema": "https://code.claude.com/schemas/marketplace.json",
   "name": "taskout",
-  "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill.",
+  "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, give it to your AI agents as a skill, and measure whether it changes their work.",
   "metadata": {
-    "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill."
+    "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, give it to your AI agents as a skill, and measure whether it changes their work."
   },
   "owner": {
     "name": "taskout"
@@ -12,7 +12,7 @@
     {
       "name": "taskout",
       "source": "./",
-      "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill.",
+      "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, give it to your AI agents as a skill, and measure whether it changes their work.",
       "author": {
         "name": "taskout"
       },

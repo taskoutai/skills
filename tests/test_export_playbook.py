@@ -10,7 +10,7 @@ import re
 import subprocess
 import sys
 
-SKILL = pathlib.Path(__file__).resolve().parents[2] / "skills" / "playbook-builder"
+SKILL = pathlib.Path(__file__).resolve().parents[1] / "skills" / "playbook-builder"
 SCRIPT = SKILL / "scripts" / "export_playbook.py"
 EXAMPLE = json.loads((SKILL / "assets" / "example-playbook.json").read_text())
 NAME = "individual-return-preparation"
@@ -59,7 +59,7 @@ def test_writes_a_skill_and_playbook_md(tmp_path):
             assert p["text"] in activity and p["text"] in everything
             if p["conditions"]:
                 assert p["conditions"] in activity
-    assert "(seen in 3 of 4 past matters)" in everything
+    assert "(seen in 3 of 4 past engagements)" in everything
 
 
 def test_refuses_and_writes_nothing_on_a_finding(tmp_path):
