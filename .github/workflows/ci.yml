@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
-      - run: python3 scripts/validate_skills.py
-      - run: python3 -m pip install --quiet pytest
-      - run: python3 -m pytest -q tests
+      # setup-python has no 3.9 build for current ubuntu-latest; uv provides one.
+      - uses: astral-sh/setup-uv@v6
+      - run: uv python install 3.9
+      - run: uv run --no-project --python 3.9 python scripts/validate_skills.py
+      - run: uv run --no-project --python 3.9 --with pytest python -m pytest -q tests
   skills-gepa:
     # judge-builder and playbook-eval need Python 3.10+; this runs the GEPA tests that skip on 3.9.
     runs-on: ubuntu-latest
