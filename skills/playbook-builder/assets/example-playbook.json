@@ -1,10 +1,16 @@
 {
   "format": "taskout.playbook",
   "format_version": "2",
-  "skill_version": "1.2.0",
+  "skill_version": "1.5.0",
   "title": "Individual return preparation",
   "general_guidance": "Written from the preparer's side. Derived from four past returns; the home office method and the documentation threshold varied with the client's records.",
   "precedent_count": 4,
+  "firm_skills": [
+    {
+      "name": "return-prep",
+      "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+    }
+  ],
   "rules": [
     {
       "topic": "Home office deduction method",
@@ -32,6 +38,9 @@
           "support_matters": 1,
           "citation_refs": [
             "c21"
+          ],
+          "stated_refs": [
+            "s2"
           ]
         },
         {
@@ -43,6 +52,24 @@
           "citation_refs": [
             "c4",
             "c15"
+          ],
+          "stated_refs": [
+            "s3"
+          ]
+        }
+      ],
+      "stated_vs_practice": "conflict",
+      "client_exceptions": [
+        {
+          "client_ref": "C-1042",
+          "text": "Use the regular method with actual expenses allocated by floor area.",
+          "conditions": "",
+          "comment": "This client keeps full utility and rent records every year.",
+          "support_matters": 2,
+          "client_matters": 2,
+          "citation_refs": [
+            "c21",
+            "c27"
           ]
         }
       ]
@@ -66,9 +93,25 @@
             "c23"
           ]
         }
-      ]
+      ],
+      "stated_vs_practice": "practice_only"
     }
   ],
+  "workflow": {
+    "steps": [
+      {
+        "activity_type": "deductions.home_office",
+        "name": "Home office",
+        "description": "Decide whether the client qualifies and which method to use."
+      },
+      {
+        "activity_type": "deductions.charitable",
+        "name": "Charitable gifts",
+        "description": "Check each gift's documentation before deducting it."
+      }
+    ],
+    "edges": []
+  },
   "local_test": {
     "content_sha256": "0c1b785f0305331849dc63ba6bfab907868ff646d1eff28a58753af8c870aceb",
     "held_out_matters": 1,

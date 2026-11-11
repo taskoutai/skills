@@ -1,0 +1,124 @@
+{
+  "kind": "taskout-playbook-eval-result",
+  "format": 1,
+  "skill_version": "1.1.0",
+  "task_sha256": "45194b4d96575c47c0f2c3eef748d7b4ea4cccc7eed768b16b5411903998e7a6",
+  "rubric_rules_sha256": null,
+  "model": "claude-opus-5-5",
+  "engagements": 6,
+  "readings_confirmed": 6,
+  "baseline": "skills-only",
+  "arms": [
+    {
+      "name": "skills-only",
+      "skills": [
+        {
+          "name": "return-prep",
+          "sha256": "7f6f4406b76dccbebd62ae00e681bdbe65f734c0f0af6b380034287b618211b7"
+        }
+      ],
+      "playbook": null,
+      "runs": 6,
+      "runs_ok": 6,
+      "playbook_skill_used": null,
+      "correct_application": {
+        "n": 6,
+        "mean": 0.5,
+        "low": 0.5,
+        "high": 0.5
+      },
+      "red_lines_taken": 6,
+      "asked_where_team_asked": {
+        "asked": 0,
+        "of": 0
+      },
+      "mean_cost_usd": 0.5,
+      "mean_turns": 7.0,
+      "mean_seconds": null
+    },
+    {
+      "name": "skills+playbook",
+      "skills": [
+        {
+          "name": "return-prep",
+          "sha256": "7f6f4406b76dccbebd62ae00e681bdbe65f734c0f0af6b380034287b618211b7"
+        }
+      ],
+      "playbook": {
+        "name": "individual-return-preparation",
+        "rules_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "runs": 6,
+      "runs_ok": 6,
+      "playbook_skill_used": 6,
+      "correct_application": {
+        "n": 6,
+        "mean": 1.0,
+        "low": 1.0,
+        "high": 1.0
+      },
+      "red_lines_taken": 0,
+      "asked_where_team_asked": {
+        "asked": 0,
+        "of": 0
+      },
+      "mean_cost_usd": 0.5,
+      "mean_turns": 7.0,
+      "mean_seconds": null
+    }
+  ],
+  "comparisons": [
+    {
+      "arm": "skills+playbook",
+      "baseline": "skills-only",
+      "correct_application_difference": {
+        "n": 6,
+        "mean": 0.5,
+        "low": 0.5,
+        "high": 0.5
+      },
+      "verdict": "better",
+      "closer_to_team": {
+        "wins": 6,
+        "losses": 0,
+        "ties": 0,
+        "win_rate_of_decided": {
+          "n": 6,
+          "rate": 1.0,
+          "low": 0.6096569663469354,
+          "high": 0.9999999999999999
+        }
+      }
+    }
+  ],
+  "rules": [
+    {
+      "rule": 0,
+      "topic": "Home office deduction method",
+      "arms": {
+        "skills-only": {
+          "right": 0,
+          "of": 6
+        },
+        "skills+playbook": {
+          "right": 6,
+          "of": 6
+        }
+      }
+    },
+    {
+      "rule": 1,
+      "topic": "Charitable gift documentation",
+      "arms": {
+        "skills-only": {
+          "right": 6,
+          "of": 6
+        },
+        "skills+playbook": {
+          "right": 6,
+          "of": 6
+        }
+      }
+    }
+  ]
+}

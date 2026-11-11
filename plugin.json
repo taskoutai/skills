@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "taskout",
-  "version": "0.1.0",
-  "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, and give it to your AI agents as a skill.",
+  "version": "0.2.0",
+  "description": "Capture how your team does its work as a playbook of reviewed rules, built on your own machine from your own past work, give it to your AI agents as a skill, and measure whether it changes their work.",
   "author": {
     "name": "taskout"
   },
