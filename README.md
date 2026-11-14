@@ -7,7 +7,7 @@
 | Skill | Useful for |
 |-------|------------|
 | playbook-builder | Turning a team's past work (one folder per past job), or one client's documents and past engagements, into a playbook of reviewed rules: preferred positions, accepted fallbacks and when they apply, red lines, when to escalate. Tests the rules on jobs kept back, then exports them as a skill your agents follow and a `PLAYBOOK.md` for any AI model. |
-| playbook-eval | Checking a playbook actually changes the work: your agent runs the same kept-back jobs with your own skills only and with your skills plus the playbook (or two playbook versions), and each run is scored against what your team actually sent. Uses your own Claude key. |
+| playbook-eval | Optional. Checking a playbook actually changes the work: your agent runs the same kept-back jobs with your own skills only and with your skills plus the playbook (or two playbook versions), and each run is scored against what your team actually sent. Uses your own Claude key. |
 | judge-builder | For playbooks kept in taskout: tuning an automated judge (with GEPA) until it agrees with your reviewers, judging every finished job with it, and turning the jobs that went wrong into proposed rule changes. Uses your own Claude key. |
 
 ## Installing
@@ -56,9 +56,11 @@ What stays on your machine: the documents, and a `.playbook-builder/` working fo
 
 playbook-builder's scripts (`check_playbook.py`, `export_playbook.py`) need Python 3.9+, use the standard library only and make no network calls.
 
-## Using playbook-eval
+## Using playbook-eval (optional)
 
-1. Keep back past jobs the playbook wasn't built from (at least 5; 10 or more is better), one folder each with `documents/` and `deliverables/`, as text files.
+A playbook doesn't need this to go live: in taskout, reviews of live jobs and trials of new versions measure it at no extra cost. Use playbook-eval only if you want evidence before your agents use a playbook and you have at least 5 finished jobs of that kind of work the playbook wasn't built from (10 or more is better). It isn't for one client's rules: a client has one engagement a year, so client mode's own test on its latest engagement is the check there. Each job runs once per arm in Claude Code, and the judge calls are billed to your own Claude API key, separately from Claude Code.
+
+1. Keep back past jobs the playbook wasn't built from, one folder each with `documents/` and `deliverables/`, as text files.
 2. Ask your agent: *"Use the playbook-eval skill to check whether our playbook in `playbook-export/<name>` improves on our own skills, on the jobs in `<folder>`."*
 3. The agent tells you how many runs it needs and waits for your go-ahead, runs each arm in a clean folder, then shows you its reading of what your team did on each job for you to confirm before scoring anything.
 4. You get `playbook-eval/report.md` (per arm: how often the agent took your team's position, red lines crossed, rules it still gets wrong, cost) and `playbook-eval/result.json` (counts only, nothing from the work).

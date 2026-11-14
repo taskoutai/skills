@@ -1,6 +1,6 @@
 ---
 name: playbook-eval
-description: "Measure, on the firm's own machine, whether a taskout playbook makes the firm's agents do the work the way the team does: the same engagements run with the firm's skills only and with the skills plus the playbook (or two playbook versions), each scored against what the team actually sent. Use before rolling a playbook out, to check a new version is an improvement, or to find the rules agents still apply wrong."
+description: "Optional: measure, on the firm's own machine, whether a service playbook makes the firm's agents do the work the way the team does: the same engagements run with the firm's skills only and with the skills plus the playbook (or two playbook versions), each scored against what the team actually sent. Use only when the person asks for an offline eval and has at least 5 finished engagements the playbook wasn't built from; not for one client's rules."
 metadata:
   version: "1.1.0"
   generated-by: "taskout"
@@ -21,6 +21,21 @@ agent's finished work with and without the playbook, on the same engagements, be
 
 Everything runs here. The engagements, the agents' work and the deliverables go only to the Claude calls these
 scripts make with the firm's own key. Nothing goes to taskout.
+
+## Optional: check it's worth running
+
+A playbook doesn't need this eval to go live. With taskout, every playbook is measured on the live work at no extra
+cost: people review a sample of finished jobs, and a new version can be tried on a share of jobs before everyone
+gets it. This eval is for a firm that wants evidence before agents use a playbook at all. Before setting anything
+up, check with the person:
+
+- **Enough engagements**: at least 5 finished engagements of this kind of work that the playbook was not built
+  from, 10 or more to be useful. With fewer, the result is "too few to tell": say so and stop.
+- **A service playbook**: one kind of work across clients. One client's rules (client mode) can't be measured
+  this way: a client has one engagement a year, never 5 kept back. Client mode's own test on its latest
+  engagement is the check there.
+- **The cost**: each engagement runs once per arm in Claude Code (billed however Claude Code is signed in), and
+  the judge's calls go to the firm's own Claude API key, billed separately. Step 1 prints the count.
 
 ## What you need
 
